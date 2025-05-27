@@ -61,7 +61,7 @@ const MiddleBox = React.forwardRef<HTMLDivElement, MiddleBoxProps>(({ middleBoxP
         await logoControls.start({
           scale:0.145,
           y: `calc(min(39vh, 39vw))`,
-          x: `calc(min(39vh, 39vw))`,
+          x: `calc(min(39vh, 39vw)*-1)`,
           transition : {
             duration: 0.5,
           }
