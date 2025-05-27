@@ -2,20 +2,332 @@
 @tailwind components;
 @tailwind utilities;
 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
+
+    --nav-tile-gap: 10px;
+    --middle-box-size: 60px;
+    --button-size: 90px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+::-webkit-scrollbar {
+    display: none;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.main {
+    height: 300vh;
+    scroll-snap-type: y proximity;
+}
+
+section.middle-wrap {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    scroll-snap-align: start; 
+    min-height: 100vh;
+}
+
+div.middle {
+    color: white;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+div.middle .middle-text-cont {
+    position: relative;
+    width: min(500px, min(100vw, 100vh) - 64px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    padding: 15px;
+}
+
+div.middle-text-cont .middle-text-one,
+div.middle-text-cont .middle-text-two {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 38px;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-style: normal;
+    padding: 20px;
+    line-height: 120%;
+}
+
+div.middle .middle-text-two {
+    opacity: 0;
+    font-size: 29px;
+}
+
+div.middle .middle-logo {
+    display: grid;
+    place-items: center;
+    height: var(--middle-box-size);
+    width: var(--middle-box-size);
+}
+
+div.middle .middle-logo svg {
+    width: 100%;
+    height: 100%;
+}
+
+.scroll-main {
+    height: 300vh;
+}
+
+
+.cards-cont {
+    display: grid;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+
+.cards-cont>div {
+    display: grid;
+    padding: 15px 20px;
+    position: absolute;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: min(2.75vw - 6px, 1.375vw + 15px)
+}
+
+.cards-cont div:nth-child(1) {
+    width: calc(20% - var(--nav-tile-gap) * 2);
+    height: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
+    left: var(--nav-tile-gap);
+    top: var(--nav-tile-gap);
+    transform-origin: 100% 100%;
+    border-radius: 8px 0 0 0;
+    grid-area: a;
+    background-color: #283750;
+    color: #b4c8e1;
+}
+
+.cards-cont div:nth-child(2) {
+    height: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
+    width: calc(30% + var(--button-size) / 2);
+    left: 20%;
+    top: var(--nav-tile-gap);
+    transform-origin: 100% 100%;
+    grid-area: b;
+    background-color: #fad24b;
+    color: #684505;
+}
+
+.cards-cont div:nth-child(3) {
+    width: calc(30% - var(--button-size) / 2 - var(--nav-tile-gap));
+    height: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
+    top: var(--nav-tile-gap);
+    transform-origin: 0 100%;
+    right: 20%;
+    background-color: #3dd3ee;
+    color: #055463;
+    grid-area: c;
+}
+
+.cards-cont div:nth-child(4) {
+    height: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
+    top: var(--nav-tile-gap);
+    right: var(--nav-tile-gap);
+    width: calc(20% - var(--nav-tile-gap) * 2);
+    transform-origin: 0 100%;
+    border-radius: 0 8px 0 0;
+    background-color: #fa551e;
+    color: #4e0119;
+    grid-area: d;
+}
+
+.cards-cont div:nth-child(5) {
+    height: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
+    left: var(--nav-tile-gap);
+    bottom: var(--nav-tile-gap);
+    width: calc(20% - var(--nav-tile-gap) * 2);
+    transform-origin: 100% 0;
+    border-bottom-left-radius: 8px;
+    position: absolute;
+    background-color: #b4dc19;
+    color: #175641;
+    border-radius: 0 0 0 8px;
+    grid-area: h;
+}
+
+.cards-cont div:nth-child(6) {
+    width: calc(30% - var(--button-size) / 2 - var(--nav-tile-gap));
+    height: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
+    left: 20%;
+    bottom: var(--nav-tile-gap);
+    transform-origin: 100% 0;
+    background-color: #ff8c19;
+    color: #6d2e09;
+    grid-area: e;
+}
+
+.cards-cont div:nth-child(7) {
+    height: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
+    width: calc(30% + var(--button-size) / 2);
+    right: 20%;
+    bottom: var(--nav-tile-gap);
+    transform-origin: 0 0;
+    background-color: #892055;
+    color: #ffafa5;
+    grid-area: i;
+}
+
+.cards-cont div:nth-child(8) {
+    height: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
+    width: calc(20% - var(--nav-tile-gap) * 2);
+    bottom: var(--nav-tile-gap);
+    right: var(--nav-tile-gap);
+    transform-origin: 0 0;
+    border-bottom-right-radius: 8px;
+    border-radius: 0 0 8px 0;
+    background-color: #c8aff0;
+    color: #682760;
+    grid-area: g;
+}
+
+.cards-cont.done>div:hover {
+    background: #000;
+    color: white;
+    transition: 0.4s;
+}
+
+@media screen and (max-width : 991px) {
+    :root {
+        --nav-tile-gap: 5px;
+        --middle-box-size:
+    }
+
+    div.middle-text-cont .middle-text-one,
+    div.middle-text-cont .middle-text-two {
+        font-size: 24px;
+    }
+
+    div.middle .middle-logo {
+        height: var(--middle-box-size);
+        width: var(--middle-box-size);
+
+
+        transition: initial;
+        color: white;
+        background: var(--accent--tab);
+        width: calc(min(500px, calc(min(100vw, 100vh) - 64px)) - calc(1 * calc(min(500px, calc(min(100vw, 100vh) - 64px)) - var(--middle-box-size))));
+        height: calc(min(500px, calc(min(100vw, 100vh) - 64px)) - calc(1 * calc(min(500px, calc(min(100vw, 100vh) - 64px)) - var(--middle-box-size))));
+        border: 1px solid transparent;
+
+    }
+
+    .cards-cont div{
+        font-size: 20px;
+    }
+
+    .cards-cont div:nth-child(1) {
+        height: calc(25% - var(--nav-tile-gap) * 2);
+        width: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
+        transform-origin: 100% 100%;
+    }
+
+    .cards-cont div:nth-child(2) {
+        top: var(--nav-tile-gap);
+        left: initial;
+        width: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
+        height: calc(25% - var(--nav-tile-gap) * 2);
+        right: var(--nav-tile-gap);
+        transform-origin: 0 100%;
+        border-radius: 0 8px 0 0;
+    }
+
+    .cards-cont div:nth-child(3) {
+        height: calc(25% - var(--button-size) / 2 - var(--nav-tile-gap));
+        width: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
+        top: 25%;
+        right: initial;
+        left: var(--nav-tile-gap);
+        transform-origin: 100% 100%;
+        border-radius: 0 0 0 0;
+    }
+
+    .cards-cont div:nth-child(4) {
+        left: initial;
+        height: calc(25% + var(--button-size) / 2);
+        width: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
+        transform-origin: 0 100%;
+        top: 25%;
+        border-radius: 0 0 0 0;
+    }
+
+    .cards-cont div:nth-child(5) {
+        top: initial;
+        height: calc(25% + var(--button-size) / 2);
+        width: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
+        transform-origin: 100% 0;
+        bottom: 25%;
+        border-radius: 0 0 0 0;
+    }
+
+    .cards-cont div:nth-child(6) {
+        width: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
+        left: initial;
+        right: var(--nav-tile-gap);
+        height: calc(25% - var(--button-size) / 2 - var(--nav-tile-gap));
+        transform-origin: 0 0;
+        bottom: 25%;
+        border-radius: 0 0 0 0;
+    }
+
+    .cards-cont div:nth-child(7) {
+        right: initial;
+        left: var(--nav-tile-gap);
+        height: calc(25% - var(--nav-tile-gap) * 2);
+        width: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
+        transform-origin: 100% 0;
+        border-bottom-left-radius: 8px;
+        border-radius: 0 0 0 8px;
+    }
+
+    .cards-cont div:nth-child(8) {
+        height: calc(25% - var(--nav-tile-gap) * 2);
+        width: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
+        border-radius: 0 0 8px 0;
+    }
+
+    div.middle .middle-text-cont {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .cards-cont div {
+        padding: 8px;
+    }
+}
+
+.viewport-line {
+  position: fixed; 
+  z-index: 10;    
 }
